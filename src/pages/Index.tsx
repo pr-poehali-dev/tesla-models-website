@@ -81,7 +81,6 @@ const teslaModels: TeslaModel[] = [
 export default function Index() {
   const [activeSection, setActiveSection] = useState('home');
   const [selectedModel, setSelectedModel] = useState<TeslaModel | null>(null);
-  const [rotation, setRotation] = useState(0);
 
   const scrollToSection = (section: string) => {
     setActiveSection(section);
@@ -520,29 +519,10 @@ export default function Index() {
                 src={selectedModel.image}
                 alt={selectedModel.name}
                 className="w-full h-full object-contain"
-                style={{
-                  transform: `perspective(1000px) rotateY(${rotation}deg)`,
-                  transition: 'transform 0.3s ease-out'
-                }}
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://via.placeholder.com/800x600/000000/FFFFFF?text=' + selectedModel.name;
                 }}
               />
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 flex items-center gap-4">
-                <button
-                  onClick={() => setRotation(rotation - 45)}
-                  className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800"
-                >
-                  <Icon name="ChevronLeft" size={20} />
-                </button>
-                <span className="text-sm font-medium">Вращение 360°</span>
-                <button
-                  onClick={() => setRotation(rotation + 45)}
-                  className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800"
-                >
-                  <Icon name="ChevronRight" size={20} />
-                </button>
-              </div>
             </div>
 
             <div className="grid grid-cols-4 gap-6 mb-8">
